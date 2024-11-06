@@ -3,9 +3,9 @@
   "short_name": "Temporizador",
   "description": "Um simples temporizador com contagem regressiva.",
   "start_url": "/",
-  "display": "standalone",
+  "display": "standalone",  /* Mostra o app como um app independente (sem a barra de navegação do navegador) */
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "theme_color": "#4CAF50",  /* Cor de destaque (barra de status no Android, por exemplo) */
   "icons": [
     {
       "src": "assets/imgs/icon.png",

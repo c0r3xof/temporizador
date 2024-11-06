@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador</title>
+
+    <!-- Referência ao favicon e ícones -->
+    <link rel="icon" href="assets/imgs/favicon.png" sizes="16x16">
+    <link rel="icon" href="assets/imgs/icon.png" sizes="32x32">
+    <link rel="icon" href="assets/imgs/icon-512.png" sizes="512x512">
+    
+    <!-- Manifesto para PWA -->
+    <link rel="manifest" href="assets/json/manifest.json">
+
+    <!-- Referência ao arquivo CSS -->
+    <link rel="stylesheet" href="assets/style/style.css">
+</head>
+<body>
+
+<div class="timer-container">
+    <div class="input-fields" id="inputFields">
+        <input type="number" id="hours" placeholder="HH" min="0" max="23">
+        <input type="number" id="minutes" placeholder="MM" min="0" max="59">
+    </div>
+    <button id="startBtn">Iniciar</button>
+
+    <div class="time hidden" id="timer">00:00</div>
+</div>
+
+<script src="assets/js/script.js"></script> <!-- Referência ao arquivo JavaScript -->
+
+<!-- Service Worker -->
+<script src="assets/js/sw.js"></script>
+
+<script>
+// Verifica se o navegador suporta PWA e registra o Service Worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/assets/js/sw.js')
+    .then(function(registration) {
+        console.log('Service Worker registrado com sucesso:', registration);
+    })
+    .catch(function(error) {
+        console.log('Erro ao registrar o Service Worker:', error);
+    });
+}
+</script>
+
+</body>
+</html>

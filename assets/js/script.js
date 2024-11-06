@@ -4,6 +4,7 @@ const timerDisplay = document.getElementById('timer');
 const hoursInput = document.getElementById('hours');
 const minutesInput = document.getElementById('minutes');
 const inputFields = document.getElementById('inputFields');
+const instructionText = document.getElementById('instructionText');
 
 // Variáveis de controle do temporizador
 let timer;
@@ -21,7 +22,8 @@ function startTimer() {
     // Mostra o temporizador
     updateDisplay();
 
-    // Esconde os inputs e o botão
+    // Esconde os inputs, botão e o texto "Defina o tempo"
+    instructionText.classList.add('hidden');
     inputFields.classList.add('hidden');
     startBtn.classList.add('hidden');
 
@@ -31,7 +33,6 @@ function startTimer() {
         if (remainingTime <= 0) {
             clearInterval(timer);  // Para o temporizador
             isRunning = false;
-            alert("Tempo esgotado!");  // Exibe um alerta quando o tempo acabar
 
             // Reseta o temporizador para o estado inicial
             resetTimer();
@@ -62,8 +63,9 @@ function resetTimer() {
     hoursInput.value = '';
     minutesInput.value = '';
     timerDisplay.textContent = '00:00';  // Reseta a exibição para 00:00
-    inputFields.classList.remove('hidden');  // Mostra novamente os inputs
-    startBtn.classList.remove('hidden');    // Mostra novamente o botão
+    instructionText.classList.remove('hidden');  // Mostra novamente o texto "Defina o tempo"
+    inputFields.classList.remove('hidden');    // Mostra novamente os inputs
+    startBtn.classList.remove('hidden');       // Mostra novamente o botão
 }
 
 // Evento do botão "Iniciar"

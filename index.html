@@ -19,10 +19,14 @@
 <body>
 
 <div class="timer-container">
+    <!-- Exibe o texto "Defina o tempo" -->
+    <p id="instructionText">Defina o tempo</p>
+
     <div class="input-fields" id="inputFields">
         <input type="number" id="hours" placeholder="HH" min="0" max="23">
         <input type="number" id="minutes" placeholder="MM" min="0" max="59">
     </div>
+    
     <button id="startBtn">Iniciar</button>
 
     <div class="time hidden" id="timer">00:00</div>

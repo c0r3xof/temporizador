@@ -6,7 +6,7 @@
     <title>Temporizador - Unimed</title>
 
     <!-- Manifesto do PWA -->
-    <link rel="manifest" href="assets/json/manifest.json"> <!-- Caminho correto para o manifesto -->
+    <link rel="manifest" href="assets/json/manifest.json"> <!-- Caminho corrigido para o manifesto -->
     <meta name="theme-color" content="#006747">
 
     <!-- Ícones -->
@@ -42,7 +42,7 @@
   // Registro do Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('assets/js/service-worker.js')  <!-- Caminho correto para o Service Worker -->
+      .register('assets/js/service-worker.js')  <!-- Caminho corrigido para o Service Worker -->
       .then(reg => console.log('Service Worker registrado com sucesso!', reg))
       .catch(err => console.log('Falha ao registrar o Service Worker', err));
   }

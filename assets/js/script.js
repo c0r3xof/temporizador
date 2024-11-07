@@ -3,54 +3,51 @@ let timeLeft;
 let totalTime;
 
 function startTimer() {
-    const timeInput = document.getElementById("timeInput").value;
-    const unit = document.getElementById("unit").value;
+  const timeInput = document.getElementById("timeInput").value;
+  const unit = document.getElementById("unit").value;
+  
+  if (timeInput && !isNaN(timeInput) && timeInput > 0) {
+    totalTime = unit === 'hours' ? timeInput * 3600 : timeInput * 60;
+    timeLeft = totalTime;
 
-    if (timeInput && !isNaN(timeInput) && timeInput > 0) {
-        totalTime = unit === 'hours' ? timeInput * 3600 : timeInput * 60;
-        timeLeft = totalTime;
+    // Ocultar os controles e t√≠tulo, mostrar o temporizador
+    document.querySelector("h1").style.display = "none";
+    document.getElementById("controls").style.display = "none";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("result").style.display = "none";
 
-        // Ocultar os controles e tÌtulo, mostrar o temporizador
-        document.querySelector("h1").style.display = "none";
-        document.getElementById("controls").style.display = "none";
-        document.getElementById("timer").style.display = "block";
-        document.getElementById("result").style.display = "none";
-
-        updateTimer();
-        timer = setInterval(updateTimer, 1000);
-    }
+    updateTimer();
+    timer = setInterval(updateTimer, 1000);
+  }
 }
 
 function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    document.getElementById("timer").textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  document.getElementById("timer").textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
 
-    const percentage = (timeLeft / totalTime) * 100;
-    document.getElementById("timer").style.width = `${percentage}%`;
+  const percentage = (timeLeft / totalTime) * 100;
+  document.getElementById("timer").style.width = `${percentage}%`;
 
-    // Verificar se o tempo est· acabando
-    if (timeLeft <= 15) {
-        document.getElementById("timer").style.backgroundColor = "#FF4D4D"; // Muda para vermelho
-        document.getElementById("timer").style.animation = "blink 1s infinite"; // Pisca a barra
-    }
-
-    if (timeLeft <= 0) {
-        clearInterval(timer);
-        document.getElementById("timer").style.display = "none";
-        document.getElementById("result").style.display = "block";
-
-        setTimeout(() => {
-            document.querySelector("h1").style.display = "block";
-            document.getElementById("controls").style.display = "block";
-            document.getElementById("result").style.display = "none";
-            document.getElementById("timeInput").value = "";
-        }, 2000);
+  // Mudan√ßa de cor e piscando quando o tempo est√° perto de acabar
+  if (timeLeft <= 15) {
+    document.getElementById("timer").style.backgroundColor = '#ffcccc';
+    if (timeLeft % 2 === 0) {
+      document.getElementById("timer").style.opacity = 0.5;
     } else {
-        timeLeft--;
+      document.getElementById("timer").style.opacity = 1;
     }
+  }
+
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    document.getElementById("result").style.display = "block";
+    document.getElementById("timer").style.display = "none";
+  }
+
+  timeLeft--;
 }
 
 function formatTime(time) {
-    return time < 10 ? `0${time}` : time;
+  return time < 10 ? "0" + time : time;
 }

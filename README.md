@@ -46,6 +46,3 @@ Alterar o Estilo: No arquivo index.html, você pode modificar o estilo CSS para 
 🚀 Dicas Rápidas
 Para fechar o script AutoHotkey: Clique com o botão direito do mouse no ícone do AutoHotkey na bandeja do sistema (próximo ao relógio) e selecione "Exit".
 Para editar o script: Clique com o botão direito no arquivo DeixarSempreVisivel.ahk e selecione "Edit Script" para abrir o código e fazer modificações.
-
-🔑 Licença
-Este projeto é licenciado sob a MIT License.

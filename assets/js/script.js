@@ -10,7 +10,7 @@ function startTimer() {
         totalTime = unit === 'hours' ? timeInput * 3600 : timeInput * 60;
         timeLeft = totalTime;
 
-        // Esconde os controles e mostra o temporizador
+        // Ocultar os controles e título, mostrar o temporizador
         document.querySelector("h1").style.display = "none";
         document.getElementById("controls").style.display = "none";
         document.getElementById("timer").style.display = "block";
@@ -29,6 +29,12 @@ function updateTimer() {
     const percentage = (timeLeft / totalTime) * 100;
     document.getElementById("timer").style.width = `${percentage}%`;
 
+    // Verificar se o tempo está acabando
+    if (timeLeft <= 15) {
+        document.getElementById("timer").style.backgroundColor = "#FF4D4D"; // Muda para vermelho
+        document.getElementById("timer").style.animation = "blink 1s infinite"; // Pisca a barra
+    }
+
     if (timeLeft <= 0) {
         clearInterval(timer);
         document.getElementById("timer").style.display = "none";
@@ -41,9 +47,6 @@ function updateTimer() {
             document.getElementById("timeInput").value = "";
         }, 2000);
     } else {
-        if (timeLeft <= 15) {
-            document.getElementById("timer").classList.add("blink");
-        }
         timeLeft--;
     }
 }

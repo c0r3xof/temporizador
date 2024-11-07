@@ -2,18 +2,18 @@
   "name": "Temporizador - Unimed",
   "short_name": "Temporizador",
   "description": "Aplicativo de Temporizador para contagem regressiva.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#006747",
   "theme_color": "#006747",
   "icons": [
     {
-      "src": "assets/imgs/icon-192x192.png",
-      "sizes": "192x192",
+      "src": "/assets/imgs/icon-192x192.png",  <!-- Corrigido aqui -->
+      "sizes": "https://raw.githubusercontent.com/c0r3xof/temporizador/refs/heads/main/assets/imgs/icon-192x192.png",
       "type": "image/png"
     },
     {
-      "src": "assets/imgs/icon-512x512.png",
+      "src": "/assets/imgs/https://raw.githubusercontent.com/c0r3xof/temporizador/refs/heads/main/assets/imgs/icon-512x512.png",  <!-- Corrigido aqui -->
       "sizes": "512x512",
       "type": "image/png"
     }

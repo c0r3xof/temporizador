@@ -12,7 +12,7 @@ IfNotExist, % htmlFile
 fileURL := "file:///" . StrReplace(htmlFile, "\", "/")
 
 ; Defina o título da janela que você espera
-windowTitle := "Temporizador - Unimed"  ; Aqui, você pode colocar o título exato da janela do Chrome ou parte do título.
+windowTitle := "Temporizador"  ; Aqui, você pode colocar o título exato da janela do Chrome ou parte do título.
 
 ; Verificar se já existe uma janela com o título correspondente
 SetTitleMatchMode, 2 ; Permite correspondência parcial no título da janela

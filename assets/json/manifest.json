@@ -8,12 +8,12 @@
   "theme_color": "#006747",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/c0r3xof/temporizador/refs/heads/main/assets/imgs/icon-192x192.png?token=GHSAT0AAAAAAC2CYMXZCLP64NWOA35HPLZGZZMXTLA",  // Caminho correto
+      "src": "assets/imgs/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://raw.githubusercontent.com/c0r3xof/temporizador/refs/heads/main/assets/imgs/icon-512x512.png?token=GHSAT0AAAAAAC2CYMXYPQI65FBJMRLWY5L4ZZMXMUQ",  // Caminho correto
+      "src": "assets/imgs/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

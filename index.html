@@ -3,52 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temporizador</title>
-
-    <!-- Referência ao favicon e ícones -->
-    <link rel="icon" href="assets/imgs/favicon.png" sizes="16x16">
-    <link rel="icon" href="assets/imgs/icon.png" sizes="32x32">
-    <link rel="icon" href="assets/imgs/icon-512.png" sizes="512x512">
+    <title>Temporizador - Unimed</title>
     
-    <!-- Manifesto para PWA -->
-    <link rel="manifest" href="assets/json/manifest.json">
+    <!-- Manifesto da PWA -->
+    <link rel="manifest" href="assets/manifest.json">
 
-    <!-- Referência ao arquivo CSS -->
-    <link rel="stylesheet" href="assets/style/style.css">
+    <!-- Cor da barra de endereços no celular -->
+    <meta name="theme-color" content="#006747">
+
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<div class="timer-container">
-    <!-- Exibe o texto "Defina o tempo" -->
-    <p id="instructionText">Defina o tempo</p>
-
-    <div class="input-fields" id="inputFields">
-        <input type="number" id="hours" placeholder="HH" min="0" max="23">
-        <input type="number" id="minutes" placeholder="MM" min="0" max="59">
-    </div>
+<div class="container">
+    <h1>Defina o tempo</h1>
     
-    <button id="startBtn">Iniciar</button>
+    <div id="controls">
+        <label for="timeInput" style="color: #006747;">Tempo:</label>
+        <input type="number" id="timeInput" placeholder="Minutos" />
+        <select id="unit">
+            <option value="minutes">Minutos</option>
+            <option value="hours">Horas</option>
+        </select>
+        <button onclick="startTimer()">Iniciar</button>
+    </div>
 
-    <div class="time hidden" id="timer">00:00</div>
+    <div id="timer">00:00</div>
+    <div id="result">Tempo Esgotado</div>
 </div>
 
-<script src="assets/js/script.js"></script> <!-- Referência ao arquivo JavaScript -->
-
-<!-- Service Worker -->
-<script src="assets/js/sw.js"></script>
-
 <script>
-// Verifica se o navegador suporta PWA e registra o Service Worker
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/assets/js/sw.js')
-    .then(function(registration) {
-        console.log('Service Worker registrado com sucesso:', registration);
-    })
-    .catch(function(error) {
-        console.log('Erro ao registrar o Service Worker:', error);
-    });
-}
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('./service-worker.js')
+            .then(reg => console.log('Service Worker registrado com sucesso!', reg))
+            .catch(err => console.log('Falha ao registrar o Service Worker', err));
+    }
 </script>
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

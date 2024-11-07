@@ -1,76 +1,53 @@
-// Seleção dos elementos
-const startBtn = document.getElementById('startBtn');
-const timerDisplay = document.getElementById('timer');
-const hoursInput = document.getElementById('hours');
-const minutesInput = document.getElementById('minutes');
-const inputFields = document.getElementById('inputFields');
-const instructionText = document.getElementById('instructionText');
-
-// Variáveis de controle do temporizador
 let timer;
-let remainingTime;
-let isRunning = false;
+let timeLeft;
+let totalTime;
 
-// Função para iniciar o temporizador
 function startTimer() {
-    const hours = parseInt(hoursInput.value) || 0;  // Pega o valor da hora ou usa 0
-    const minutes = parseInt(minutesInput.value) || 0;  // Pega o valor dos minutos ou usa 0
+    const timeInput = document.getElementById("timeInput").value;
+    const unit = document.getElementById("unit").value;
 
-    // Converte o tempo total para segundos
-    remainingTime = hours * 3600 + minutes * 60;
+    if (timeInput && !isNaN(timeInput) && timeInput > 0) {
+        totalTime = unit === 'hours' ? timeInput * 3600 : timeInput * 60;
+        timeLeft = totalTime;
 
-    // Mostra o temporizador
-    updateDisplay();
+        // Esconde os controles e mostra o temporizador
+        document.querySelector("h1").style.display = "none";
+        document.getElementById("controls").style.display = "none";
+        document.getElementById("timer").style.display = "block";
+        document.getElementById("result").style.display = "none";
 
-    // Esconde os inputs, botão e o texto "Defina o tempo"
-    instructionText.classList.add('hidden');
-    inputFields.classList.add('hidden');
-    startBtn.classList.add('hidden');
+        updateTimer();
+        timer = setInterval(updateTimer, 1000);
+    }
+}
 
-    // Inicia a contagem regressiva
-    isRunning = true;
-    timer = setInterval(function() {
-        if (remainingTime <= 0) {
-            clearInterval(timer);  // Para o temporizador
-            isRunning = false;
+function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById("timer").textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
 
-            // Reseta o temporizador para o estado inicial
-            resetTimer();
-        } else {
-            remainingTime--;  // Decrementa o tempo
-            updateDisplay();   // Atualiza a exibição do temporizador
+    const percentage = (timeLeft / totalTime) * 100;
+    document.getElementById("timer").style.width = `${percentage}%`;
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("result").style.display = "block";
+
+        setTimeout(() => {
+            document.querySelector("h1").style.display = "block";
+            document.getElementById("controls").style.display = "block";
+            document.getElementById("result").style.display = "none";
+            document.getElementById("timeInput").value = "";
+        }, 2000);
+    } else {
+        if (timeLeft <= 15) {
+            document.getElementById("timer").classList.add("blink");
         }
-    }, 1000);
+        timeLeft--;
+    }
 }
 
-// Função para atualizar a exibição do temporizador
-function updateDisplay() {
-    const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
-    const seconds = remainingTime % 60;
-
-    // Formatação do tempo
-    timerDisplay.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
-}
-
-// Função para formatar o tempo, garantindo 2 dígitos
 function formatTime(time) {
     return time < 10 ? `0${time}` : time;
 }
-
-// Função para resetar o temporizador
-function resetTimer() {
-    hoursInput.value = '';
-    minutesInput.value = '';
-    timerDisplay.textContent = '00:00';  // Reseta a exibição para 00:00
-    instructionText.classList.remove('hidden');  // Mostra novamente o texto "Defina o tempo"
-    inputFields.classList.remove('hidden');    // Mostra novamente os inputs
-    startBtn.classList.remove('hidden');       // Mostra novamente o botão
-}
-
-// Evento do botão "Iniciar"
-startBtn.addEventListener('click', function() {
-    if (!isRunning) {
-        startTimer();
-    }
-});

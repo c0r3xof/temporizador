@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temporizador</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temporizador - Unimed</title>
 
-    <!-- Manifesto do PWA -->
-    <link rel="manifest" href="assets/json/manifest.json"> <!-- Caminho corrigido para o manifesto -->
-    <meta name="theme-color" content="#006747">
+  <!-- Meta Tags para Instalação no iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Temporizador - Unimed">
 
-    <!-- Ícones -->
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/imgs/icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/imgs/icon-512x512.png">
+  <!-- Ícones para o iOS -->
+  <link rel="apple-touch-icon" href="assets/imgs/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/imgs/icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="assets/imgs/icon-167x167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/imgs/icon-180x180.png">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Outros Meta Tags (Manifesto e Progressive Web App) -->
+  <link rel="manifest" href="assets/json/manifest.json">
+  <meta name="theme-color" content="#006747">
+  <meta name="description" content="Aplicativo de Temporizador para contagem regressiva.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/imgs/icon-192x192.png">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- JavaScript -->
+  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-
-<div class="container">
+  <div class="container">
     <h1>Defina o tempo</h1>
     
     <div id="controls">
-        <label for="timeInput" style="color: #006747;">Tempo:</label>
-        <input type="number" id="timeInput" placeholder="Minutos" />
-        <select id="unit">
-            <option value="minutes">Minutos</option>
-            <option value="hours">Horas</option>
-        </select>
-        <button onclick="startTimer()">Iniciar</button>
+      <label for="timeInput" style="color: #006747;">Tempo:</label>
+      <input type="number" id="timeInput" placeholder="Minutos" />
+      <select id="unit">
+        <option value="minutes">Minutos</option>
+        <option value="hours">Horas</option>
+      </select>
+      <button onclick="startTimer()">Iniciar</button>
     </div>
 
     <div id="timer">00:00</div>
     <div id="result">Tempo Esgotado</div>
-</div>
+  </div>
 
-<!-- Script JS -->
-<script src="assets/js/script.js"></script>
-
-<script>
-  // Registro do Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register('assets/js/service-worker.js')  <!-- Caminho corrigido para o Service Worker -->
-      .then(reg => console.log('Service Worker registrado com sucesso!', reg))
-      .catch(err => console.log('Falha ao registrar o Service Worker', err));
-  }
-</script>
-
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(function(registration) {
+          console.log('Service Worker registrado com sucesso: ', registration);
+        })
+        .catch(function(error) {
+          console.log('Falha ao registrar o Service Worker: ', error);
+        });
+    }
+  </script>
 </body>
 </html>
